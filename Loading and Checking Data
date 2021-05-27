@@ -24,3 +24,11 @@ test.isnull().sum()
 train.describe(include="all")
 train.groupby('Survived').mean()
 train.corr()
+#Creating a bar plot
+fig = plt.figure()
+ax = fig.add_axes([0,0,1,1])
+status = ['Survived','Dead']
+ind = [alive,dead]
+ax.bar(status,ind)
+plt.xlabel("Status")
+plt.show()
