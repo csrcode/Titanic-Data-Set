@@ -52,5 +52,19 @@ sum(test['Age'].isnull())
 #Dropping null values of test test
 test=test.dropna()
 sum(test['Age'].isnull())
-
+#Extracting age column from test set
+x_test=test[['Age']]
+#Building Prediction Model
+y_pred=dtc.predict(x_test)
+y_pred
+#For submitting on Kaggle
+#Creating data frame for prediction of passenger Survived and passenger id
+submission = pd.DataFrame({'PassengerId':test['PassengerId'],'Survived':y_pred})
+#Visualise the first 10 rows
+submission.head(10)
+#Convert data frame to CSV for submission
+#This is saved in the same directory as a notebook
+filename = 'Titanic Predictions 1.csv'
+submission.to_csv(filename,index=False)
+print('Saved file: ' + filename)
 
