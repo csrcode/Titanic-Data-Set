@@ -1,1 +1,56 @@
+#Importing libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+#Loading data from Kaggle
+test = pd.read_csv('../input/titanic/test.csv')
+train =pd.read_csv('../input/titanic/train.csv')
+#Cheking top 5 rows of data
+train.head()
+#Reading column names of train set 
+list(train.columns)
+#Dimensions of train set
+train.shape
+train['Survived'].value_counts()
+#Plotting BAR chart
+plt.figure(figsize=(5,5))
+plt.bar(list(train['Survived'].value_counts().keys()),list(train['Survived'].value_counts()),color=["b","g"])
+plt.show()
+train['Pclass'].value_counts()
+#Plotting BAR chart
+plt.figure(figsize=(5,5))
+plt.bar(list(train['Pclass'].value_counts().keys()),list(train['Pclass'].value_counts()),color=["r","yellow","purple"])
+plt.show()
+train['Sex'].value_counts()
+plt.figure(figsize=(5,5))
+plt.bar(list(train['Sex'].value_counts().keys()),list(train['Sex'].value_counts()),color=["brown","black"])
+plt.show()
+#Plotting Histogram
+plt.figure(figsize=(5,7))
+plt.hist(train['Age'],color=['grey'])
+plt.title("Distribution of Age")
+plt.xlabel("Age")
+plt.show()
+#Finding null values.False means no null values & true means null values are there
+train['Survived'].isnull()
+sum(train['Survived'].isnull())
+sum(train['Age'].isnull())
+#Dropping null values from Age 
+train=train.dropna()
+#Checking for null values again after dropping
+sum(train['Age'].isnull())
+#Building the model
+sum(train['Survived'].isnull())
+sum(train['Age'].isnull())
+#Extracting the dependent variable (Survived) & independent variable (Age) into object-x_train & y_train
+x_train=train[['Age']]
+y_train=train[['Survived']]
+from sklearn.tree import DecisionTreeClassifier
+dtc = DecisionTreeClassifier()
+dtc.fit(x_train,y_train)
+sum(test['Age'].isnull())
+#Dropping null values of test test
+test=test.dropna()
+sum(test['Age'].isnull())
+
 
